@@ -1,0 +1,15 @@
+Methodology: STL Recreation via Mesh Processing Pipeline
+
+Each component of the mouse assembly is processed through an individual Python script using the build123d framework in conjunction with the trimesh mesh processing library. The workflow is as follows:
+
+Per-Component Scripts
+Each part is assigned a dedicated Python script that loads the reference geometry, applies mesh validation and correction operations — including normal vector orientation and topological hole closure — and exports a verified STL file as output. This ensures each component is treated as an isolated, self-contained geometry unit.
+
+Mesh Validation and Repair
+Prior to export, each mesh undergoes a two-stage repair process. First, face normals are recalculated and corrected to ensure consistent outward orientation across all surfaces. Second, topological discontinuities are identified and closed to guarantee a fully watertight solid — a prerequisite for zero volumetric difference between the source and output geometry.
+
+Assembly Script
+A separate assembly script loads all individually processed component meshes and concatenates them into a single unified geometry, representing the complete mouse assembly. This output is exported as a single STL file.
+
+Dependency Management
+All third-party dependencies are declared in a requirements.txt file, ensuring reproducibility across different development environments without manual configuration.
